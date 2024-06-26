@@ -96,6 +96,7 @@ function speakQAContent(button) {
     const errorMessage = `Please enter a number between ${MIN_COUNT} and ${MAX_COUNT}.`;
 
     // Ensure counter input only accepts numbers between MIN_COUNT and MAX_COUNT
+    if(counterInput){
     counterInput.addEventListener('input', function() {
         let currentValue = parseInt(this.value);
         if (isNaN(currentValue) || currentValue < MIN_COUNT) {
@@ -107,7 +108,7 @@ function speakQAContent(button) {
         }
         validateCount(currentValue);
     });
-
+    }
     function isCheckboxSelected() {
         return Array.from(checkboxes).some(checkbox => checkbox.checked);
     }
