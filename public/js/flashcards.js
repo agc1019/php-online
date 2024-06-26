@@ -98,6 +98,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add event listener to the shuffle button
     shuffleBtn.addEventListener('click', shuffleAndDisplayCards);
 
+    // Add event listeners to prev and next buttons
+    prevBtn.addEventListener('click', () => {
+        if (currentCardIndex > 0) {
+            currentCardIndex--;
+            showCard(currentCardIndex);
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentCardIndex < cards.length - 1) {
+            currentCardIndex++;
+            showCard(currentCardIndex);
+        }
+    });
+
     // Show the initial card and update the counter
     showCard(currentCardIndex);
     updateCardCounter();
