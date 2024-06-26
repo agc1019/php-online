@@ -122,7 +122,7 @@ LEFT JOIN collection_titles c ON c.title_id = a.title_id WHERE a.collection_id='
     
 }
 ?>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
                var delete_test = "";
                 function NextPage(clicked_id) {
