@@ -5,7 +5,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
 if(isset($_SESSION['title_id'])){
 if($_SESSION['title_id'] != 0){
 
-    include ('connection.php');
+    include ('./connection.php');
 
 ?>
 
@@ -47,7 +47,7 @@ if($_SESSION['title_id'] != 0){
     <body>
         
         <!-- SIDEBAR & Navigation bar-->
-        <?php include("sidebar.php"); ?>
+        <?php include("./sidebar.php"); ?>
 
         <div class="main">
 

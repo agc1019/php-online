@@ -50,7 +50,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
     <body>
 
         <!-- SIDEBAR -->
-        <?php include("sidebar.php"); ?>
+        <?php include("./sidebar.php"); ?>
 
          <!-- CONTENT SIDE-->
         <div class="main">
@@ -87,7 +87,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
 
                             <!-- CARDS -->
                             <div class="col-md-8 card-container">
-                                        <?php include("flashcards_card.php"); ?>
+                                        <?php include("./flashcards_card.php"); ?>
                             </div>
 
                             <!-- NEXT BUTTON -->
@@ -244,7 +244,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
             }
             $.ajax({
                         type: 'POST',
-                        url: 'set_exam.php',
+                        url: './set_exam.php',
                         data: {
                             type: value,
                             number: number,

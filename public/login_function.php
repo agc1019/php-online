@@ -57,7 +57,7 @@ if($result->num_rows > 0 && $result !== FALSE){
 		$_SESSION['num_of_titles'] = $row['num_of_titles'];
 		$_SESSION['num_of_entries'] = $row['num_of_entries'];
 		$_SESSION['test_count'] = $row['test_count'];
-		header("Location: dashboard.php");
+		header("Location: ./dashboard.php");
 		exit();
 
 	}

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include ("connection.php");
-require "vendor/autoload.php";
+include ("./connection.php");
+require "./vendor/autoload.php";
 
 use GeminiAPI\Client;
 use GeminiAPI\Resources\Parts\TextPart;

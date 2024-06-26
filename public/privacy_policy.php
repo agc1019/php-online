@@ -35,10 +35,10 @@
             <div class="nav_links_container">
 
                 <ul class="nav_list">
-                    <li><a href="dashboard.php">Dashboard</a></li>
-                    <li><a href="collection.php">Collection</a></li>
-                    <li><a href="homepage.php">About</a></li>
-                    <li><a href="html_tools.php">Tools</a></li>
+                    <li><a href="./dashboard.php">Dashboard</a></li>
+                    <li><a href="./collection.php">Collection</a></li>
+                    <li><a href="./homepage.php">About</a></li>
+                    <li><a href="./html_tools.php">Tools</a></li>
                 </ul>
 
             </div>
@@ -63,12 +63,12 @@
 
                     <hr class="divider1">
 
-                    <a href="account_settings.php">Account Settings</a>
-                    <a href="about.php">About Insightify</a> 
-                    <a href="store_link_3">Get Insightify App</a>
-                    <a href="privacy_policy.php">Privacy Policy</a>
-                    <a href="contact.php">Contact Us</a>
-                    <a href="terms.php">Terms and Condition</a>
+                    <a href="./account_settings.php">Account Settings</a>
+                    <a href="./about.php">About Insightify</a> 
+                    <a href="./store_link_3">Get Insightify App</a>
+                    <a href="./privacy_policy.php">Privacy Policy</a>
+                    <a href="./contact.php">Contact Us</a>
+                    <a href="./terms.php">Terms and Condition</a>
 
                     <hr class="divider2">
 

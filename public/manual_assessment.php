@@ -41,7 +41,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
 
 <body>
     <!-- SIDEBAR -->
-    <?php include("sidebar.php"); ?>
+    <?php include("./sidebar.php"); ?>
 
     <div class="main">
         <div class="content">
@@ -186,7 +186,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
         }
         $.ajax({
                         type: 'POST',
-                        url: 'generate_manual_test.php',
+                        url: './generate_manual_test.php',
                         async:'false',
                         data: {
                             questions: JSON.stringify(question_list),

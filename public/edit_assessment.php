@@ -44,7 +44,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
     <body>
 
         <!-- SIDEBAR -->
-        <?php include ("sidebar.php"); ?>
+        <?php include ("./sidebar.php"); ?>
 
         <div class="main">
             <div class="content">
@@ -86,7 +86,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
             </div>
 
         </div>
-        <?php include ("edit_assessment_load.php"); ?>
+        <?php include ("./edit_assessment_load.php"); ?>
 
     </body>
 

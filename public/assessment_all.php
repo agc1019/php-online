@@ -1,6 +1,6 @@
 <?php
 
-include ('connection.php');
+include ('./connection.php');
 
 if ($_SESSION['collection_id'] != NULL) {
     $collection_id = $_SESSION['collection_id'];
@@ -128,7 +128,7 @@ LEFT JOIN collection_titles c ON c.title_id = a.title_id WHERE a.collection_id='
                 function NextPage(clicked_id) {
                     $.ajax({
                         type: "POST",  //type of method
-                        url: "set_test.php",  //your page
+                        url: "./set_test.php",  //your page
                         data: { test_id: clicked_id },// passing the values
                         success: function (res) {
                             location.href = "./flashcards.php";

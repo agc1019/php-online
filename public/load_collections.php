@@ -1,5 +1,5 @@
 <?php
-include ('connection.php');
+include ('./connection.php');
 
 
 if ($_SESSION['collection_id'] !== NULL) {

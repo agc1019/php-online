@@ -1,6 +1,6 @@
 <?php
 
-include ("connection.php");
+include ("/.connection.php");
 require "vendor/autoload.php";
 
 use GeminiAPI\Client;
