@@ -1037,12 +1037,12 @@ if (!textarea.value.trim()) {
             else if (option == "#translate"){
                 var entry_text = document.getElementById("ytext2").value;
                 var generated_text = document.getElementById("ttext").value;
-            }
+            } 
         if(added == false){
             added = true;
             $.ajax({
                     type: 'POST',
-                    url: 'add_entry.php',
+                    url: './add_entry.php',
                     dataType:'json',
                     data: {
                         feature_chosen: option,

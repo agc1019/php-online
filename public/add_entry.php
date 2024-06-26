@@ -11,6 +11,7 @@ $title_id = $_POST['title_id'];
 $page = $_POST['page'];
 $entry_name = $_POST['entry_name'];
 $email = $_SESSION['email'];
+$_SESSION['title_id'] = $title_id;
 if ($_POST['feature_chosen'] == '#simplify')
     $feature_chosen = "Simplify";
 else if ($_POST['feature_chosen'] == '#paraphrase')
@@ -18,7 +19,6 @@ else if ($_POST['feature_chosen'] == '#paraphrase')
 else if ($_POST['feature_chosen'] == '#translate')
     $feature_chosen = "Translate";
 
-mysqli_set_charset($conn, "utf8mb4");
 $sql = "INSERT INTO entry_texts (feature_chosen, text_scanned, text_generated) VALUES (?, ?, ?)";
 $stmt = mysqli_prepare($conn, $sql);
 mysqli_stmt_bind_param($stmt, 'sss', $feature_chosen, $text_scanned, $text_generated);
@@ -29,7 +29,6 @@ $sql = "SELECT last_insert_id() AS text_id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $text_id = $row["text_id"];
-
 $sql = "INSERT INTO title_entries(title_id,entry_name,page,text_id) VALUES('$title_id','$entry_name','$page','$text_id')";
 mysqli_query($conn, $sql);
 
