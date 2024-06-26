@@ -76,7 +76,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
                         </div>
                     </div>
                 </div>
-                
+                 
                 <div class="flashcard_fullscreen_container" id="Flashcards">
                     <div class="container mt-5">
                         <div class="row">
@@ -209,7 +209,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
                 </div>
             </div>
 
-
+ 
             <!-- TEST DELETED POPUP -->
             <div class="modal fade" id="test-deleted-popup" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
