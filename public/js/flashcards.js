@@ -5,6 +5,19 @@ const nextBtn = document.querySelector('.next-btn');
 const cardNumberElement = document.getElementById('card-number');
 const totalCardsElement = document.getElementById('total-cards');
 
+const form = document.getElementById('testPopup');
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    const checkboxContainer = document.getElementById('checkboxContainer');
+    const checkboxError = document.getElementById('checkboxError');
+    const counterInput = document.getElementById('counter');
+    const counterError = document.getElementById('counterError');
+    const decreaseButton = document.getElementById('decreaseBtn');
+    const increaseButton = document.getElementById('increaseBtn');
+    const selectPrompt = document.getElementById('validationSelectPrompt');
+    const MIN_COUNT = 1;
+    const MAX_COUNT = 99;
+    const errorMessage = `Please enter a number between ${MIN_COUNT} and ${MAX_COUNT}.`;
+
 let currentCardIndex = 0;
 
 // Set total number of cards
@@ -82,34 +95,10 @@ function speakQAContent(button) {
 (() => {
     'use strict';
 
-    const form = document.getElementById('testPopup');
-    const checkboxes = document.querySelectorAll('.form-check-input');
-    const checkboxContainer = document.getElementById('checkboxContainer');
-    const checkboxError = document.getElementById('checkboxError');
-    const counterInput = document.getElementById('counter');
-    const counterError = document.getElementById('counterError');
-    const decreaseButton = document.getElementById('decreaseBtn');
-    const increaseButton = document.getElementById('increaseBtn');
-    const selectPrompt = document.getElementById('validationSelectPrompt');
-    const MIN_COUNT = 1;
-    const MAX_COUNT = 99;
-    const errorMessage = `Please enter a number between ${MIN_COUNT} and ${MAX_COUNT}.`;
+    
 
     // Ensure counter input only accepts numbers between MIN_COUNT and MAX_COUNT
-    document.addEventListener('DOMContentLoaded', () => {
-    counterInput.addEventListener('input', function() {
-        let currentValue = parseInt(this.value);
-        if (isNaN(currentValue) || currentValue < MIN_COUNT) {
-            this.value = MIN_COUNT;
-        } else if (currentValue > MAX_COUNT) {
-            this.value = MAX_COUNT;
-        } else {
-            this.value = currentValue;
-        }
-        validateCount(currentValue);
-    });
-    
-});
+  
 
     function isCheckboxSelected() {
         return Array.from(checkboxes).some(checkbox => checkbox.checked);
@@ -319,6 +308,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Do not start autoplay on page load
     playBtn.innerHTML = '<i class="fas fa-play"></i>'; // Set the initial state to play
+
+    counterInput.addEventListener('input', function() {
+        let currentValue = parseInt(this.value);
+        if (isNaN(currentValue) || currentValue < MIN_COUNT) {
+            this.value = MIN_COUNT;
+        } else if (currentValue > MAX_COUNT) {
+            this.value = MAX_COUNT;
+        } else {
+            this.value = currentValue;
+        }
+        validateCount(currentValue);
+    });
 });
 
 // Function to speak the text content (front or back)
