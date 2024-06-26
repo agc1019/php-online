@@ -130,13 +130,16 @@ include ("./connection.php");
     $sql = "SELECT 
     a.test_id, 
     q.question, 
-    r.answer
+    r.answer,
+    q.item_no as q_item,
+    r.item_no as a_item
 FROM 
     test a
 JOIN 
     (SELECT 
         test_id, 
-        question, 
+        question,
+        item_no,
         @row_num_q := IF(@current_test_q = test_id, @row_num_q + 1, 1) AS row_num,
         @current_test_q := test_id
      FROM 
@@ -150,7 +153,8 @@ JOIN
 JOIN 
     (SELECT 
         test_id, 
-        answer, 
+        answer,
+        item_no,
         @row_num_r := IF(@current_test_r = test_id, @row_num_r + 1, 1) AS row_num,
         @current_test_r := test_id
      FROM 
@@ -202,7 +206,7 @@ WHERE
 
         $.ajax({
             type: 'POST',
-            url: 'edit_assessment_save.php',
+            url: './edit_assessment_save.php',
             data: {
                 questions: JSON.stringify(questions_list),
                 questions_id: JSON.stringify(question_id_list),
