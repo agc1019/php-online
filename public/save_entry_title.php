@@ -1,17 +1,39 @@
 <?php
-include ('connection.php');
+include('./connection.php');
 
+session_start(); // Ensure the session is started
 
-    $collection_id = $_SESSION['collection_id'];
-    $sql = "SELECT * from collection_titles where collection_id='$collection_id'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            ?>
+// Check if collection_id is set in the session
+if (!isset($_SESSION['collection_id'])) {
+    echo json_encode(['error' => 'No collection ID in session']);
+    exit;
+}
 
-<option value="<?php echo $row['title_id'] ?>"><?php echo $row['title_name'] ?> </option>
+$collection_id = $_SESSION['collection_id'];
 
-<?php
-        }
+// Prepare SQL query to prevent SQL injection
+$sql = $conn->prepare("SELECT * FROM collection_titles WHERE collection_id = ? ORDER BY collection_id DESC");
+$sql->bind_param('i', $collection_id); // Assuming collection_id is an integer
+$sql->execute();
+$result = $sql->get_result();
+
+$options = array();
+
+if ($result->num_rows > 0) {
+    // Fetch data
+    while ($row = $result->fetch_assoc()) {
+        $options[] = $row;
     }
-    ?>
+} else {
+    echo json_encode(['error' => 'No results found']);
+    exit;
+}
+
+// Close the statement and connection
+$sql->close();
+$conn->close();
+
+// Set content type to JSON and return data
+header('Content-Type: application/json');
+echo json_encode($options);
+?>

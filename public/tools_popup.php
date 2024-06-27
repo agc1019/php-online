@@ -330,7 +330,7 @@
                                             <div class="col-11">
                                                 <select id="titles"class="form-select" id="validationSelectTitle" required>
                                                 <option selected disabled value="">Choose from existing titles</option>
-                                                <?php include('./save_entry_title.php'); ?>
+                                                
                                                 </select>
                                                 <div class="invalid-feedback">
                                                 Please choose from your existing titles.
@@ -692,7 +692,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     window.saveEntryModal = new bootstrap.Modal(document.getElementById('saveEntry'));
         const entrySavedModal = new bootstrap.Modal(document.getElementById('entry-saved-popup'));
 
@@ -768,6 +768,55 @@ function handleAddTitleClick() {
             addTitleForm_1.classList.add('was-validated');
         }
     });
+
+    const dropdown = document.getElementById('titles');
+    // Function to fetch data from the server and update the dropdown
+    async function fetchDataAndUpdateDropdown() {
+        try {
+            const response = await fetch('./save_entry_title.php');
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            const data = await response.json();
+
+            if (data.error) {
+                console.error('Error fetching data:', data.error);
+                return;
+            }
+
+            dropdown.innerHTML = '<option selected disabled value="">Choose from existing titles</option>';
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.title_id;
+                option.textContent = item.title_name;
+                dropdown.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            console.log(error);
+        }
+    }
+
+    // Fetch data and update the dropdown when the page loads
+    await fetchDataAndUpdateDropdown();
+
+    async function AddTitle_1(titleSavedModal_1){
+            const title = document.getElementById("title_1").value;
+            const author = document.getElementById("author_1").value;
+            const genre = document.getElementById("genre_1").value;
+            const type = document.getElementById("type_1").value;
+            const email = "<?php echo $_SESSION['email']; ?>";
+            const collection_id = "<?php echo $_SESSION['collection_id']; ?>";
+            $.ajax({
+                type : "POST",
+                url  : "add_title.php", 
+                data : { title : title, author : author, genre : genre, type : type, email : email, collection_id : collection_id },
+                success: function(res){ 
+                            fetchDataAndUpdateDropdown();
+                            titleSavedModal_1.show();
+                        }
+            }); 
+        }
 
     document.getElementById('exit-saved').addEventListener('click', function() {
         entrySavedModal.hide();
@@ -1076,25 +1125,6 @@ function handleAddTitleClick() {
 
     
 });
-
-
-function AddTitle_1(titleSavedModal_1){
-            const title = document.getElementById("title_1").value;
-            const author = document.getElementById("author_1").value;
-            const genre = document.getElementById("genre_1").value;
-            const type = document.getElementById("type_1").value;
-            const email = "<?php echo $_SESSION['email']; ?>";
-            const collection_id = "<?php echo $_SESSION['collection_id']; ?>";
-            $.ajax({
-                type : "POST",
-                url  : "add_title.php", 
-                data : { title : title, author : author, genre : genre, type : type, email : email, collection_id : collection_id },
-                success: function(res){ 
-                    alert(res);
-                            titleSavedModal_1.show();
-                        }
-            }); 
-        }
 
     function goback(){
         saveEntryModal.show();
