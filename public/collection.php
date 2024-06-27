@@ -468,7 +468,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
                 }
             });
 
-
+ 
         }
         var delete_item = "";
         function AddTitle(titleSavedModal){
@@ -480,7 +480,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
         var collection_id = "<?php echo $_SESSION['collection_id']; ?>";
         $.ajax({
             type : "POST",
-            url  : "add_title.php", 
+            url  : "./add_title.php", 
             data : { title : title, author : author, genre : genre, type : type, email : email, collection_id : collection_id },
             success: function(res){ 
                         titleSavedModal.show();

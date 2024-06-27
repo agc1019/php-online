@@ -15,7 +15,7 @@ LEFT JOIN collection_titles c ON c.title_id = a.title_id WHERE a.collection_id='
             ?>
 
 
- 
+  
 
             <div class="test card mb-3 p-3"> <!-- card -->
                 <div class="card-body p-0 pb-4 border-bottom row">

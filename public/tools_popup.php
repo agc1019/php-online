@@ -1097,21 +1097,6 @@ function handleAddTitleClick() {
     // Form submission handling for addTitleModal
     const addTitleForm = document.querySelector('#addTitle form');
   
-    addTitleForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-  
-        if (addTitleForm.checkValidity()) {
-            // Form is valid, proceed to hide addTitle modal
-            addTitleModal.hide();
-            titleSavedModal.show();
-              AddTitle(titleSavedModal);
-            // Simulate saving process with timeout (adjust as needed)
-        } else {
-            // Form is invalid, show validation feedback
-            addTitleForm.classList.add('was-validated');
-        }
-    });
 
       // Close button for titleSavedModal
     document.getElementById('exit-saved').addEventListener('click', function() {
