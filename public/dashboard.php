@@ -111,7 +111,7 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
             </div>
 
 
-
+ 
             <!-- TOOLS -->
             <h1>Tools</h1>
             <div class="tools_container">
@@ -495,6 +495,13 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
             </div>
         </div>
 
+
+   
+
+
+
+
+
         <?php include("tools_popup.php"); ?>
     </div>
 
@@ -558,12 +565,12 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
         });
 
         function AddTitle(titleSavedModal){
-            var title = document.getElementById("title").value;
-            var author = document.getElementById("author").value;
-            var genre = document.getElementById("genre").value;
-            var type = document.getElementById("type").value;
-            var email = "<?php echo $_SESSION['email']; ?>";
-            var collection_id = "<?php echo $_SESSION['collection_id']; ?>";
+            let title = document.getElementById("title").value;
+            let author = document.getElementById("author").value;
+            let genre = document.getElementById("genre").value;
+            let type = document.getElementById("type").value;
+            let email = "<?php echo $_SESSION['email']; ?>";
+            let collection_id = "<?php echo $_SESSION['collection_id']; ?>";
             $.ajax({
                 type : "POST",
                 url  : "add_title.php", 
@@ -574,6 +581,8 @@ if(isset($_SESSION['username']) && isset($_SESSION['email'])) {
             }); 
         }
         
+    
+
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

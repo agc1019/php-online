@@ -339,7 +339,7 @@
 
                                             <div class="col-1">
                                                 <button class="add_title">
-                                                    <i class="fa-solid fa-notes-medical fa-xl " style="color: white;" onclick="window.location.href='collection.php'"></i>
+                                                    <i class="fa-solid fa-notes-medical fa-xl " style="color: white;" id="title_add"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -579,24 +579,154 @@
         </div>
         <!-- END OF CITE POPUP -->
 
+        <!-- ADD TITLE POPUP -->
+        <div class="modal fade" id="addTitle_a" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Create a new title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body pt-5 ps-5 pe-5 pb-3">
+                        <p class="bluetext">categorize your entries</p>
+                        <br>
+                        <h2>What type of text are you saving?</h2>
+
+                        <form class="row g-3 needs-validation" novalidate>
+                            <div class="col-12">
+                                <select id="type_1" class="form-select" id="validationSelectType_1" required>
+                                <option selected disabled value="">Choose from different types</option>
+                                <option>Blog</option>
+                                <option>Book</option>
+                                <option>Conference</option>
+                                <option>Encyclopedia</option>
+                                <option>Journal</option>
+                                <option>Magazine</option>
+                                <option>Newspaper</option>
+                                <option>Others</option>
+                                <option>Thesis</option>
+                                <option>Website</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                Please choose a type.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <br>
+                                <h2 style="text-align: center;">Fill title details below</h2>
+                                <hr>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="validationTitleName_1" class="form-label"><b>title name</b></label>
+                                <input id="title_1"type="text" class="form-control" id="validationTitleName_1"  required>
+                                <div class="invalid-feedback">
+                                            Please enter a title name.
+                                            </div>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="validationAuthorName_1" class="form-label"><b>author name</b></label>
+                                <input id="author_1"type="text" class="form-control" id="validationAuthorName_1" required>
+                                <div class="invalid-feedback">
+                                    Please enter an author name.
+                                    </div>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="validationSelectGenre_1" class="form-label"><b>genre</b></label>
+                                <select id="genre_1" class="form-select" id="validationSelectGenre_1" required>
+                                <option selected disabled value="">Choose from different genres</option>
+                                <option>Comedy</option>
+                                <option>Crime and Mystery</option>
+                                <option>Drama</option>
+                                <option>Fantasy</option>
+                                <option>History</option>
+                                <option>Horror</option>
+                                <option>Nonfiction</option>
+                                <option>Others</option>
+                                <option>Persuasive</option>
+                                <option>Romance</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                Please choose a genre.
+                                </div>
+                            </div>
+
+                            <div class="modal-footer-button mt-5 mb-4">
+                                <button class="btn btn-primary" type="submit">Finish</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL/POPUP -->
+        
+
+        <!-- TITLE SAVED POPUP -->
+        <div class="modal fade" id="title-saved-popup_a" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content title-saved">
+                    <div class="modal-body">
+                        <i class="fas fa-check-circle fa-2x checkmark-animation mt-3"></i>
+                        <h1>Title successfully <br> saved!</h1>
+                        <button type="button" id="exit-saved" class="btn btn-primary" data-bs-dismiss="modal"
+                            aria-label="Exit" onclick="goback();">Okay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const saveEntryModal = new bootstrap.Modal(document.getElementById('saveEntry'));
-    const entrySavedModal = new bootstrap.Modal(document.getElementById('entry-saved-popup'));
+    window.saveEntryModal = new bootstrap.Modal(document.getElementById('saveEntry'));
+        const entrySavedModal = new bootstrap.Modal(document.getElementById('entry-saved-popup'));
 
-    const saveEntryForm = document.querySelector('#saveEntry form');
+        const saveEntryForm = document.querySelector('#saveEntry form');
+        const addTitleButton = document.getElementById('title_add');
+        const addTitleModal_1 = new bootstrap.Modal(document.getElementById('addTitle_a'));
+    const titleSavedModal_1 = new bootstrap.Modal(document.getElementById('title-saved-popup_a'));
+    const addTitleForm_1 = document.querySelector('#addTitle_a form');
+        let isSubmitting = false;
+        let addTitleClicked = false;
+// Function to be executed when addTitleButton is clicked
+function handleAddTitleClick() {
+        addTitleClicked = true;  // Set the flag to true when addTitleButton is clicked
+        saveEntryModal.hide();
+        addTitleModal_1.show();
+    }
 
+    // Add event listener to the addTitleButton
+    addTitleButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        handleAddTitleClick();
+    });
 
-    let isSubmitting = false;
-
-    saveEntryForm.addEventListener('submit', function(event) {
+    // Form submit event listener
+    saveEntryForm.addEventListener('submit', function (event) {
         event.preventDefault();
         event.stopPropagation();
- 
+
+        // Check if the addTitleButton was clicked
+        if (addTitleClicked) {
+            addTitleClicked = false;  // Reset the flag
+            return;
+        }
+
         // Prevent multiple submissions
         if (isSubmitting) {
             return;
@@ -620,6 +750,22 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             saveEntryForm.classList.add('was-validated');
             isSubmitting = false;
+        }
+    });
+
+    addTitleForm_1.addEventListener('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+  
+        if (addTitleForm_1.checkValidity()) {
+            // Form is valid, proceed to hide addTitle modal
+            addTitleModal_1.hide();
+            AddTitle_1(titleSavedModal_1);
+   
+            // Simulate saving process with timeout (adjust as needed)
+        } else {
+            // Form is invalid, show validation feedback
+            addTitleForm_1.classList.add('was-validated');
         }
     });
 
@@ -917,8 +1063,8 @@ document.addEventListener('DOMContentLoaded', function() {
             addTitleForm.classList.add('was-validated');
         }
     });
-  
-    // Close button for titleSavedModal
+
+      // Close button for titleSavedModal
     document.getElementById('exit-saved').addEventListener('click', function() {
         titleSavedModal.hide();
     });
@@ -927,7 +1073,32 @@ document.addEventListener('DOMContentLoaded', function() {
     titleSavedModal._element.addEventListener('hidden.bs.modal', function () {
         document.querySelector('.modal-backdrop').remove();
     });
+
+    
 });
+
+
+function AddTitle_1(titleSavedModal_1){
+            const title = document.getElementById("title_1").value;
+            const author = document.getElementById("author_1").value;
+            const genre = document.getElementById("genre_1").value;
+            const type = document.getElementById("type_1").value;
+            const email = "<?php echo $_SESSION['email']; ?>";
+            const collection_id = "<?php echo $_SESSION['collection_id']; ?>";
+            $.ajax({
+                type : "POST",
+                url  : "add_title.php", 
+                data : { title : title, author : author, genre : genre, type : type, email : email, collection_id : collection_id },
+                success: function(res){ 
+                    alert(res);
+                            titleSavedModal_1.show();
+                        }
+            }); 
+        }
+
+    function goback(){
+        saveEntryModal.show();
+    }
 
 const generateButtons = document.querySelectorAll('.btn-generate');
 
@@ -1150,6 +1321,137 @@ if (!textarea.value.trim()) {
         toast.show();
     }
 
+  
+    
+  
+    // Close button for titleSavedModal
+    document.getElementById('exit-saved').addEventListener('click', function() {
+        titleSavedModal_1.hide();
+    });
+  
+    // Remove modal backdrop on hide
+    titleSavedModal._element.addEventListener('hidden.bs.modal', function () {
+        document.querySelector('.modal-backdrop').remove();
+    });
+
+
 </script>
+
+<style>
+    /* CREATE NEW TITLE POPUP */
+#addTitle_a .modal-dialog {
+    border-radius: 20px;
+}
+
+#addTitle_a .modal-content {
+    border-radius: 15px;
+}
+
+#addTitle_a .modal-header {
+    background-color: #005CD6;
+    width: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 20px;
+    color: white;
+  }
+
+  #addTitle_a .modal-header h1{
+    font-size: 30px;
+    font-weight: 700;
+  }
+  
+  #addTitle_a .bluetext{
+    color: #005CD6;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: -25px;
+  }
+  
+  #addTitle_a .modal-body h2{
+    margin-bottom: 0px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  
+  #addTitle_a .modal-body {
+    padding: 20px; /* Add padding to all sides */
+}
+  
+/* Full-width input fields */
+#addTitle_a .modal-body input[type=text] {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    background-color: #BFD6F5;
+    color: #212529;
+    font-family: Poppins;
+}
+
+#addTitle_a .modal-body select {
+    margin-top: 10px;
+    background-color: #BFD6F5;
+    padding: 15px 20px;
+    border: none;
+}
+
+
+#addTitle_a .btn-primary{
+    border-radius: 15px;
+    font-weight: 700;
+    width: 100%;
+    height: 50px;
+}
+
+#addTitle_a .form-select:focus, 
+#addTitle_a .form-control:focus {
+    background-color: #BFD6F5;
+    outline: none;
+    box-shadow: 0 0 4px grey;
+}
+
+
+/* TITLE SAVED POPUP */
+#title-saved-popup_a .modal-body {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#title-saved-popup_a h1 {
+    font-size: 28px;
+    margin: 0;
+    line-height: 1;
+    text-align: center;
+    margin: 10px;
+}
+
+/* Checkmark animation */
+.checkmark-animation {
+    color: #28a745; /* Green success color */
+    animation: checkmark-bounce 1s ease-out;
+}
+
+@keyframes checkmark-bounce {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+#title-saved-popup_a button {
+    margin-top: 30px;
+    width: 100%;
+    background-color: #7ED957;
+    border: none;
+    border-radius: 15px;
+    color: #000;
+    font-weight: 700;
+}
+</style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

@@ -44,7 +44,6 @@ foreach ($data['questions'] as $index => $question) {
     echo '        <h1>' . ($index + 1) . '/' . count($data['questions']) . '</h1>';
     echo '        <i class="fa-solid fa-volume-high"></i>';
     echo '    </div>';
-    echo '    <h1><span class="span-text-bold">Passage: </span> Harry </h1>';
     echo '    <h2><span class="span-text-bold">Question: </span>' . $question['question'] . '</h2>';
 
     if ($data['questions'][$index]['type'] == 'multiple_choice') {
@@ -61,19 +60,19 @@ foreach ($data['questions'] as $index => $question) {
             foreach ($chunk as $choice) {
                 if($wrong == false){
                     if($ans[$index] == $choice['option']){
-                        echo '<button class="check-button answer" onclick="selectButton(this)">' . $choice['option'] . '</button>';
+                        echo '<button class="check-button answer">' . $choice['option'] . '</button>';
                     }else{
-                        echo '<button class="choice-button answer" onclick="selectButton(this)">' . $choice['option'] . '</button>';
+                        echo '<button class="choice-button answer">' . $choice['option'] . '</button>';
                     }
                 } else if($wrong == true){
                     if($ans[$index] == $choice['option'] && $choice['is_correct'] == "false"){
-                        echo '<button class="wrong-button answer" onclick="selectButton(this)">' . $choice['option'] . '</button>';
+                        echo '<button class="wrong-button answer">' . $choice['option'] . '</button>';
                     }else{
                         if($choice['is_correct'] == "true"){
-                    echo '<button class="check-button answer" onclick="selectButton(this)">' . $choice['option'] . '</button>';
+                    echo '<button class="check-button answer">' . $choice['option'] . '</button>';
                    }
                    else{
-                    echo '<button class="choice-button answer" onclick="selectButton(this)">' . $choice['option'] . '</button>';
+                    echo '<button class="choice-button answer">' . $choice['option'] . '</button>';
                    }
                     }
                    
