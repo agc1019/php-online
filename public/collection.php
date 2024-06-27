@@ -254,7 +254,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
             </div>
         </div>
 
-
+  
 
 
         <!-- ADD TITLE POPUP -->

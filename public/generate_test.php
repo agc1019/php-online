@@ -12,7 +12,7 @@ $test_name = $_POST['test_name'];
 $counter = $_POST['counter'];
 
 $decodedArray = json_decode($QnApost, true);
-
+ 
 //Accumulating the prompt
 $prompt = 'Create an exactly '. $counter .' questions with answers each Using these passages [';
 

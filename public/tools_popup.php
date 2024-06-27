@@ -1091,22 +1091,7 @@ function handleAddTitleClick() {
             }
         });
     });
-    const addTitleModal = new bootstrap.Modal(document.getElementById('addTitle'));
-    const titleSavedModal = new bootstrap.Modal(document.getElementById('title-saved-popup'));
-  
-    // Form submission handling for addTitleModal
-    const addTitleForm = document.querySelector('#addTitle form');
-  
-
-      // Close button for titleSavedModal
-    document.getElementById('exit-saved').addEventListener('click', function() {
-        titleSavedModal.hide();
-    });
-  
-    // Remove modal backdrop on hide
-    titleSavedModal._element.addEventListener('hidden.bs.modal', function () {
-        document.querySelector('.modal-backdrop').remove();
-    });
+    
 
     
 });
@@ -1345,10 +1330,10 @@ if (!textarea.value.trim()) {
     });
   
     // Remove modal backdrop on hide
-    titleSavedModal._element.addEventListener('hidden.bs.modal', function () {
+    titleSavedModal_1._element.addEventListener('hidden.bs.modal', function () {
         document.querySelector('.modal-backdrop').remove();
     });
-
+    
 
 </script>
 
